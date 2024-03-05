@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import styles from "./links.module.css";
 import NavLink from "./navLink/navLink";
 
@@ -21,6 +22,7 @@ const links = [
   },
 ];
 const Links = () => {
+  const [open, setOpen] = useState(false);
   const session = true;
   const isAdmin = false;
   return (
@@ -38,6 +40,20 @@ const Links = () => {
           <NavLink item={{ title: "Login", path: "/login" }} />
         )}
       </div>
+      {/* mobile */}
+      <button
+        className={styles.menuButton}
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        Menu
+      </button>
+      {open && (
+        <div className={styles.mobileLinks}>
+          {links.map((link) => (
+            <NavLink key={link.title} item={link} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
